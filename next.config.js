@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
-const isExport = process.env.NEXT_EXPORT === "true";
-
 const nextConfig = {
   reactStrictMode: false,
   poweredByHeader: false,
   compress: true,
-  output: isExport ? "export" : undefined,
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -27,22 +24,6 @@ const nextConfig = {
       },
     ],
   },
-  ...(isExport
-    ? {}
-    : {
-        async rewrites() {
-          return [
-            {
-              source: "/api/:path*",
-              destination: "http://localhost:3001/api/:path*",
-            },
-            {
-              source: "/uploads/:path*",
-              destination: "http://localhost:3001/uploads/:path*",
-            },
-          ];
-        },
-      }),
 };
 
 module.exports = nextConfig;
