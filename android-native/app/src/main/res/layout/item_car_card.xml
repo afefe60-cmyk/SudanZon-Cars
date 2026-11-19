@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/cars_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image Container with Badges -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="190dp">
+
+            <ImageView
+                android:id="@+id/imgCar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="صورة السيارة" />
+
+            <!-- Featured Badge (مميز) -->
+            <TextView
+                android:id="@+id/badgeFeatured"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="12dp"
+                android:background="@drawable/badge_featured"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="مميز"
+                android:textColor="@color/cars_white"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <!-- Favorite Heart Icon Button -->
+            <ImageView
+                android:id="@+id/btnFav"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="12dp"
+                android:background="@drawable/bg_search_input"
+                android:padding="8dp"
+                android:src="@android:drawable/btn_star_big_off"
+                android:contentDescription="إضافة للمفضلة" />
+        </FrameLayout>
+
+        <!-- Car Info Body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- Title & Rating -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtCarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="تويوتا لاندكروزر 2022"
+                    android:textColor="@color/cars_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCarRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="★ 4.8"
+                    android:textColor="@color/cars_gold"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Price in SDG (Bold Green matching design) -->
+            <TextView
+                android:id="@+id/txtCarPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="125,000,000 ج.س"
+                android:textColor="@color/cars_green"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <!-- Specs & City Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📍 الخرطوم"
+                    android:textColor="@color/cars_text_muted"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txtTransmission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="أوتوماتيك"
+                    android:textColor="@color/cars_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

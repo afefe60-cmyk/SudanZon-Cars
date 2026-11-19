@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cars_bg">
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomActionBar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Car Hero Image with Floating Header -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp">
+
+                <ImageView
+                    android:id="@+id/imgCarDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="صورة تفاصيل السيارة" />
+
+                <!-- Floating Top Bar Buttons (Back, Share, Fav) -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/btnBack"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentStart="true"
+                        android:background="@drawable/bg_search_input"
+                        android:padding="8dp"
+                        android:src="@android:drawable/ic_menu_revert"
+                        android:contentDescription="رجوع" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/btnShare"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_search_input"
+                            android:padding="8dp"
+                            android:src="@android:drawable/ic_menu_share"
+                            android:contentDescription="مشاركة" />
+
+                        <ImageView
+                            android:id="@+id/btnFavDetail"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_search_input"
+                            android:padding="8dp"
+                            android:src="@android:drawable/btn_star_big_off"
+                            android:contentDescription="مفضلة" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <!-- Photo Counter Pill (1 / 6) -->
+                <TextView
+                    android:id="@+id/txtImageCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="14dp"
+                    android:background="@drawable/badge_featured"
+                    android:backgroundTint="#80000000"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="3dp"
+                    android:text="1 / 6"
+                    android:textColor="@color/cars_white"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- Main Specs & Details Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cars_surface"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Title & Rating -->
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="تويوتا لاندكروزر 2022"
+                    android:textColor="@color/cars_text"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="★ 4.8 (124 تقييم)"
+                    android:textColor="@color/cars_gold"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <!-- Price in SDG (Bold Green) -->
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="125,000,000 ج.س"
+                    android:textColor="@color/cars_green"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <!-- 4 Specs Cards Row (سنة الصنع، كم، ناقل الحركة، المحرك) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <!-- Year -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_search_input"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="سنة الصنع"
+                            android:textColor="@color/cars_text_muted"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtSpecYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="2022"
+                            android:textColor="@color/cars_text"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Mileage -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_search_input"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="العداد كم"
+                            android:textColor="@color/cars_text_muted"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtSpecMileage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="50,000"
+                            android:textColor="@color/cars_text"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Transmission -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_search_input"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="الناقل"
+                            android:textColor="@color/cars_text_muted"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtSpecTrans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="أوتوماتيك"
+                            android:textColor="@color/cars_text"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Engine -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_search_input"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="المحرك"
+                            android:textColor="@color/cars_text_muted"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtSpecEngine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="V8"
+                            android:textColor="@color/cars_text"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:text="الوصف"
+                    android:textColor="@color/cars_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="سيارة بحالة ممتازة، صيانة دورية، مواصفات عالية."
+                    android:textColor="@color/cars_text_muted"
+                    android:textSize="13sp" />
+
+                <!-- Seller Info Card (معرض النخبة للسيارات + عضو موثق) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/cars_bg">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="14dp">
+
+                        <ImageView
+                            android:id="@+id/imgSeller"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            android:contentDescription="البائع" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@id/imgSeller"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtSellerName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="معرض النخبة للسيارات"
+                                android:textColor="@color/cars_text"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="✔ عضو موثق في سودان زون"
+                                android:textColor="@color/cars_primary"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Sticky Bottom Action Bar (اتصال & واتساب) -->
+    <LinearLayout
+        android:id="@+id/bottomActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/cars_white"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <!-- Call Button (اتصال) -->
+        <Button
+            android:id="@+id/btnCall"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_call"
+            android:text="اتصال 📞"
+            android:textColor="@color/cars_white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- WhatsApp Button (واتساب) -->
+        <Button
+            android:id="@+id/btnWhatsapp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_whatsapp"
+            android:text="واتساب 💬"
+            android:textColor="@color/cars_white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- SudanZon Cars Palette -->
+    <color name="cars_primary">#0066CC</color>
+    <color name="cars_primary_dark">#0A2540</color>
+    <color name="cars_primary_navy">#0F3360</color>
+    <color name="cars_primary_light">#E0F2FE</color>
+
+    <color name="cars_green">#16A34A</color>
+    <color name="cars_green_dark">#15803D</color>
+    <color name="cars_green_light">#DCFCE7</color>
+
+    <color name="cars_gold">#F59E0B</color>
+    <color name="cars_gold_light">#FEF3C7</color>
+
+    <color name="cars_bg">#F8FAFC</color>
+    <color name="cars_surface">#FFFFFF</color>
+    <color name="cars_border">#E2E8F0</color>
+
+    <color name="cars_text">#0F172A</color>
+    <color name="cars_text_muted">#64748B</color>
+    <color name="cars_text_light">#94A3B8</color>
+    <color name="cars_white">#FFFFFF</color>
+
+    <!-- Launcher Icons -->
+    <color name="ic_launcher_background">#0066CC</color>
+</resources>

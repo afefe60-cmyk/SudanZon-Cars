@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SudanZon Cars</string>
+    <string name="title_activity_main">SudanZon Cars</string>
+    <string name="package_name">com.sudanzon.cars</string>
+    <string name="custom_url_scheme">com.sudanzon.cars</string>
+</resources>

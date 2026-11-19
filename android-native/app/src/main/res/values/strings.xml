@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SudanZon Cars</string>
+    <string name="api_base_url">http://10.0.2.2:3001/</string>
+    <string name="api_prod_url">https://api.sudanzon.com/</string>
+    <string name="slogan">سيارتك .. على بعد نقرة واحدة</string>
+</resources>

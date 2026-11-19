@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cars_primary</item>
+        <item name="colorPrimaryDark">@color/cars_primary_dark</item>
+        <item name="colorAccent">@color/cars_gold</item>
+        <item name="android:windowBackground">@color/cars_bg</item>
+        <item name="android:statusBarColor">@color/cars_primary_navy</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Splash" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@color/cars_white</item>
+        <item name="android:statusBarColor">@color/cars_white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

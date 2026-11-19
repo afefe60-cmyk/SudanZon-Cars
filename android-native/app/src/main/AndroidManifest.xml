@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 1. Splash Screen -->
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 2. Home Screen -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 3. Advanced Search & Filters -->
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 4. Car Details -->
+        <activity
+            android:name=".CarDetailActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 5. Add Car Listing -->
+        <activity
+            android:name=".AddCarActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 6. Notifications -->
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 7. My Account -->
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+    </application>
+
+</manifest>
