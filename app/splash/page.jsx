@@ -19,7 +19,7 @@ export default function SplashScreen() {
     <div className="fixed inset-0 z-50 bg-white flex flex-col justify-center items-center select-none overflow-hidden">
       <div className="relative w-full h-full max-w-md max-h-[850px] flex items-center justify-center">
         <Image
-          src="/splash-bg.png"
+          src="/splash-bg.jpg"
           alt="SudanZon Cars Splash"
           fill
           priority

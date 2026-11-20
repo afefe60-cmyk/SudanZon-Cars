@@ -3,7 +3,6 @@ package com.sudanzon.cars.api;
 import android.os.Handler;
 import android.os.Looper;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,9 +16,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class ApiClient {
-    // 10.0.2.2 for Android Emulator, localhost for ADB reverse, or fallback live IP
-    private static final String BASE_URL = "http://10.0.2.2:3001/api/cars";
-    private static final String LIVE_URL = "http://localhost:3001/api/cars";
+    // Official live production API for SudanZon digital ecosystem
+    public static final String PROD_SERVER = "https://api.sudanzon.com";
+    public static final String LOCAL_SERVER = "http://10.0.2.2:3001";
+
+    private static String currentServer = PROD_SERVER;
+    private static String authToken = null;
 
     private static final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
     private static final Handler MAIN = new Handler(Looper.getMainLooper());
@@ -29,19 +31,47 @@ public final class ApiClient {
         void onError(String message);
     }
 
+    public static void setAuthToken(String token) {
+        authToken = token;
+    }
+
+    public static void setUseLocal(boolean useLocal) {
+        currentServer = useLocal ? LOCAL_SERVER : PROD_SERVER;
+    }
+
+    private static String resolveUrl(String endpoint) {
+        if (endpoint == null || endpoint.isEmpty()) {
+            return currentServer + "/api/cars";
+        }
+        if (endpoint.startsWith("http://") || endpoint.startsWith("https://")) {
+            return endpoint;
+        }
+        if (endpoint.startsWith("/api/")) {
+            return currentServer + endpoint;
+        }
+        if (endpoint.startsWith("/")) {
+            return currentServer + "/api/cars" + endpoint;
+        }
+        return currentServer + "/api/cars/" + endpoint;
+    }
+
     public static void get(final String endpoint, final Callback callback) {
         EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection conn = null;
                 try {
-                    String fullUrl = endpoint.startsWith("http") ? endpoint : BASE_URL + endpoint;
+                    String fullUrl = resolveUrl(endpoint);
                     URL url = new URL(fullUrl);
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(6000);
-                    conn.setReadTimeout(8000);
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(10000);
                     conn.setRequestProperty("Accept", "application/json");
+
+                    if (authToken != null && !authToken.isEmpty()) {
+                        conn.setRequestProperty("Authorization", "Bearer " + authToken);
+                    }
 
                     int code = conn.getResponseCode();
                     InputStream is = (code >= 200 && code < 300) ? conn.getInputStream() : conn.getErrorStream();
@@ -64,7 +94,7 @@ public final class ApiClient {
                     MAIN.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (callback != null) callback.onError(e.getMessage());
+                            if (callback != null) callback.onError(e != null ? e.getMessage() : "خطأ في الاتصال");
                         }
                     });
                 } finally {
@@ -80,15 +110,19 @@ public final class ApiClient {
             public void run() {
                 HttpURLConnection conn = null;
                 try {
-                    String fullUrl = endpoint.startsWith("http") ? endpoint : BASE_URL + endpoint;
+                    String fullUrl = resolveUrl(endpoint);
                     URL url = new URL(fullUrl);
                     conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
-                    conn.setConnectTimeout(6000);
-                    conn.setReadTimeout(8000);
+                    conn.setConnectTimeout(8000);
+                    conn.setReadTimeout(12000);
                     conn.setDoOutput(true);
                     conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                     conn.setRequestProperty("Accept", "application/json");
+
+                    if (authToken != null && !authToken.isEmpty()) {
+                        conn.setRequestProperty("Authorization", "Bearer " + authToken);
+                    }
 
                     if (body != null) {
                         OutputStream os = conn.getOutputStream();
@@ -118,7 +152,7 @@ public final class ApiClient {
                     MAIN.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (callback != null) callback.onError(e.getMessage());
+                            if (callback != null) callback.onError(e != null ? e.getMessage() : "خطأ في الاتصال");
                         }
                     });
                 } finally {

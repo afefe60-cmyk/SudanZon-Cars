@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import BrandLogo from "../../components/BrandLogo";
 import { 
   ArrowRight, 
@@ -20,12 +22,40 @@ import {
 } from "lucide-react";
 
 export default function AccountPage() {
-  const user = {
+  const router = useRouter();
+  const [currentUser, setCurrentUser] = useState({
     name: "محمد أحمد علي",
     type: "عضو موثق",
+    phone: "0912345678",
     adsCount: 5,
     favoritesCount: 12,
     chatsCount: 8,
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("sudanzon_user");
+      const token = localStorage.getItem("sudanzon_token");
+      if (stored) {
+        const u = JSON.parse(stored);
+        setCurrentUser(prev => ({
+          ...prev,
+          name: u.name || prev.name,
+          phone: u.phone || prev.phone
+        }));
+        setIsLoggedIn(true);
+      } else if (!token) {
+        setIsLoggedIn(false);
+      }
+    } catch (e) {}
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("sudanzon_token");
+    localStorage.removeItem("sudanzon_user");
+    alert("تم تسجيل الخروج بنجاح");
+    router.push("/auth/login");
   };
 
   const menuItems = [
@@ -66,37 +96,49 @@ export default function AccountPage() {
         </div>
 
         {/* User Name & Verification Badge */}
-        <h2 className="text-xl font-black text-slate-900">{user.name}</h2>
+        <h2 className="text-xl font-black text-slate-900">{currentUser.name}</h2>
         <div className="flex items-center gap-1.5 text-xs font-black text-[#16a34a] mt-1">
           <CheckCircle2 size={15} className="text-[#16a34a]" />
-          <span>{user.type}</span>
+          <span>{isLoggedIn ? `${currentUser.type} (${currentUser.phone})` : "زائر"}</span>
         </div>
 
         {/* 3. Stats Row (Matching Screen 8: إعلاناتي 5, المفضلة 12, المحادثات 8) */}
         <div className="grid grid-cols-3 gap-3 w-full mt-6 pt-5 border-t border-slate-100">
           <div className="bg-slate-50 rounded-2xl p-3 flex flex-col items-center justify-center gap-1 border border-slate-100">
             <Car size={18} className="text-[#0066cc]" />
-            <span className="text-lg font-black text-slate-900">{user.adsCount}</span>
+            <span className="text-lg font-black text-slate-900">{currentUser.adsCount}</span>
             <span className="text-[10px] text-slate-400 font-bold">إعلاناتي</span>
           </div>
 
           <div className="bg-slate-50 rounded-2xl p-3 flex flex-col items-center justify-center gap-1 border border-slate-100">
             <Heart size={18} className="text-[#0066cc]" />
-            <span className="text-lg font-black text-slate-900">{user.favoritesCount}</span>
+            <span className="text-lg font-black text-slate-900">{currentUser.favoritesCount}</span>
             <span className="text-[10px] text-slate-400 font-bold">المفضلة</span>
           </div>
 
           <div className="bg-slate-50 rounded-2xl p-3 flex flex-col items-center justify-center gap-1 border border-slate-100">
             <MessageSquare size={18} className="text-[#0066cc]" />
-            <span className="text-lg font-black text-slate-900">{user.chatsCount}</span>
+            <span className="text-lg font-black text-slate-900">{currentUser.chatsCount}</span>
             <span className="text-[10px] text-slate-400 font-bold">المحادثات</span>
           </div>
         </div>
 
         {/* Green Manage Account Button (Matching Screen 8) */}
-        <button className="w-full mt-5 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#16a34a] hover:bg-[#15803d] text-white shadow-lg shadow-emerald-600/25 transition active:scale-95">
-          إدارة حسابي
-        </button>
+        {isLoggedIn ? (
+          <button 
+            onClick={() => alert("بيانات الحساب محدثة وجاهزة")}
+            className="w-full mt-5 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#16a34a] hover:bg-[#15803d] text-white shadow-lg shadow-emerald-600/25 transition active:scale-95"
+          >
+            إدارة حسابي
+          </button>
+        ) : (
+          <Link
+            href="/auth/login"
+            className="w-full mt-5 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#0066cc] hover:bg-[#004d99] text-white shadow-lg shadow-blue-500/25 transition active:scale-95 text-center block"
+          >
+            تسجيل الدخول / فتح حساب
+          </Link>
+        )}
       </div>
 
       {/* 4. Menu List (Matching Screen 5) */}
@@ -130,9 +172,12 @@ export default function AccountPage() {
 
         {/* Log Out Button */}
         <div className="p-4">
-          <button className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border-2 border-[#0066cc] text-[#0066cc] font-black text-xs hover:bg-blue-50 transition active:scale-95">
+          <button 
+            onClick={isLoggedIn ? handleLogout : () => router.push("/auth/login")}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl border-2 border-[#0066cc] text-[#0066cc] font-black text-xs hover:bg-blue-50 transition active:scale-95"
+          >
             <LogOut size={16} />
-            <span>تسجيل الخروج</span>
+            <span>{isLoggedIn ? "تسجيل الخروج" : "تسجيل الدخول"}</span>
           </button>
         </div>
       </div>

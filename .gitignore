@@ -36,6 +36,7 @@ next-env.d.ts
 
 # Android Gradle build outputs
 *.apk
+*.zip
 android-native/.gradle/
 android-native/build/
 android-native/app/build/
