@@ -1,0 +1,11 @@
+# Robots.txt for SudanZon Cars (cars.sudanzon.com)
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /account
+Disallow: /messages
+Disallow: /notifications
+Disallow: /auth/
+
+# Dedicated Sitemap for Google Search Console
+Sitemap: https://cars.sudanzon.com/sitemap.xml
