@@ -63,9 +63,8 @@ export default function AccountPage() {
     { label: "المحادثات", href: "/messages", icon: MessageSquare, badge: "3" },
     { label: "المفضلة", href: "/account/favorites", icon: Heart, badge: null },
     { label: "الإشعارات", href: "/notifications", icon: Bell, badge: "5" },
-    { label: "إعدادات الحساب", href: "/account/settings", icon: Settings, badge: null },
-    { label: "مساعدة ودعم", href: "/support", icon: HelpCircle, badge: null },
-    { label: "حول التطبيق", href: "/about", icon: Info, badge: null },
+    { label: "سياسة الخصوصية", href: "/privacy", icon: Info, badge: null },
+    { label: "الشروط والأحكام", href: "/terms", icon: HelpCircle, badge: null },
   ];
 
   return (

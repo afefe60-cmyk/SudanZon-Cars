@@ -13,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.sudanzon.cars.adapter.CarAdapter;
 import com.sudanzon.cars.api.ApiClient;
 import com.sudanzon.cars.model.CarItem;
+import com.sudanzon.cars.ui.NavigationHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -152,41 +153,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void scrollToTop() {
+        if (rvCars != null) {
+            rvCars.smoothScrollToPosition(0);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NavigationHelper.setupBottomNav(this, R.id.navHome);
+    }
+
     private void setupBottomNav() {
-        findViewById(R.id.navHome).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rvCars.smoothScrollToPosition(0);
-            }
-        });
-
-        findViewById(R.id.navSearch).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
-            }
-        });
-
-        findViewById(R.id.navAdd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddCarActivity.class));
-            }
-        });
-
-        findViewById(R.id.navChats).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "المحادثات المباشرة مع البائعين", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        findViewById(R.id.navAccount).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AccountActivity.class));
-            }
-        });
+        NavigationHelper.setupBottomNav(this, R.id.navHome);
     }
 
     private void loadCars() {

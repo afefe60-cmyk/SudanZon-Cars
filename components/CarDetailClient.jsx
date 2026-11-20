@@ -15,6 +15,7 @@ import {
   CheckCircle2, 
   Phone, 
   MessageCircle, 
+  MessageSquare, 
   MapPin, 
   ShieldCheck,
   ChevronLeft,
@@ -174,17 +175,23 @@ export default function CarDetailClient({ id }) {
           </p>
         </div>
 
-        {/* 5. Seller Card (Matching Screen 4) */}
-        <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 flex items-center justify-between">
+        {/* 5. Seller Card (Clickable -> Opens Seller Profile & All Their Ads) */}
+        <Link 
+          href={`/seller?name=${encodeURIComponent(car.seller.name)}&phone=${encodeURIComponent(car.seller.phone)}&city=${encodeURIComponent(car.city)}`}
+          className="bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-2xl p-4 flex items-center justify-between transition group"
+        >
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 rounded-full overflow-hidden bg-sky-200 border-2 border-white shadow">
               <Image src={car.seller.avatar} alt={car.seller.name} fill className="object-cover" />
             </div>
             <div>
-              <h3 className="text-sm font-black text-slate-900">{car.seller.name}</h3>
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-sm font-black text-slate-900 group-hover:text-[#0066cc] transition">{car.seller.name}</h3>
+                <span className="text-[10px] text-[#0066cc] font-bold">‹ ملف المعلن</span>
+              </div>
               <div className="flex items-center gap-1 text-[11px] font-bold text-[#16a34a] mt-0.5">
                 <CheckCircle2 size={13} className="text-[#16a34a]" />
-                <span>{car.seller.type}</span>
+                <span>{car.seller.type} • انقر لمشاهدة جميع إعلاناته</span>
               </div>
             </div>
           </div>
@@ -193,30 +200,39 @@ export default function CarDetailClient({ id }) {
             <MapPin size={13} className="text-amber-500" />
             <span>{car.city}</span>
           </span>
-        </div>
+        </Link>
       </div>
 
-      {/* 6. Fixed Bottom Action Bar (Matching Screen 4: Call blue button & WhatsApp green button) */}
+      {/* 6. Fixed Bottom Action Bar (اتصال & محادثة داخلية & واتساب) */}
       <div className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 z-50">
-        <div className="max-w-md mx-auto grid grid-cols-2 gap-3">
-          {/* WhatsApp Button (Green) */}
-          <a
-            href={`https://wa.me/${car.seller.whatsapp}?text=${encodeURIComponent(`السلام عليكم، استفسار عن سيارة ${car.title} عبر منصة SudanZon Cars`)}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl font-black text-sm text-white bg-[#16a34a] hover:bg-[#15803d] shadow-lg shadow-emerald-600/25 transition active:scale-95"
-          >
-            <MessageCircle size={18} />
-            <span>واتساب</span>
-          </a>
-
+        <div className="max-w-md mx-auto grid grid-cols-3 gap-2">
           {/* Call Button (Blue) */}
           <a
             href={`tel:${car.seller.phone}`}
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl font-black text-sm text-white bg-[#0066cc] hover:bg-[#004d99] shadow-lg shadow-blue-600/25 transition active:scale-95"
+            className="flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-black text-xs sm:text-sm text-white bg-[#0066cc] hover:bg-[#004d99] shadow-md shadow-blue-600/25 transition active:scale-95"
           >
-            <Phone size={18} />
+            <Phone size={16} />
             <span>اتصال</span>
+          </a>
+
+          {/* In-App Chat Button (Dark/Slate) */}
+          <Link
+            href={`/messages?seller=${encodeURIComponent(car.seller.name)}&car=${encodeURIComponent(car.title)}`}
+            className="flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-black text-xs sm:text-sm text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200/80 shadow-sm transition active:scale-95"
+          >
+            <MessageSquare size={16} />
+            <span>محادثة</span>
+          </Link>
+
+          {/* WhatsApp Button (Green) */}
+          <a
+            href={`https://wa.me/${car.seller.whatsapp}?text=${encodeURIComponent(`السلام عليكم، استفسار عن سيارة (${car.title}) المعروضة على SudanZon Cars بسعر ${car.priceSdg.toLocaleString()} ج.س`)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center gap-1.5 py-3 px-2 rounded-2xl font-black text-xs sm:text-sm text-white bg-[#16a34a] hover:bg-[#15803d] shadow-md shadow-emerald-600/25 transition active:scale-95"
+          >
+            <MessageCircle size={16} />
+            <span>واتساب</span>
           </a>
         </div>
       </div>

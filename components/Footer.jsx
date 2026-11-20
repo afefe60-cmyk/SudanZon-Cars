@@ -92,9 +92,15 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
           <p>© {new Date().getFullYear()} SudanZon Cars. جميع الحقوق محفوظة لشبكة سودان زون.</p>
-          <div className="flex items-center gap-1">
-            <span>صُنع بشغف لخدمة المواطن السوداني</span>
-            <Heart size={12} className="text-rose-500 fill-rose-500" />
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-slate-300 transition">سياسة الخصوصية</Link>
+            <span>•</span>
+            <Link href="/terms" className="hover:text-slate-300 transition">الشروط والأحكام</Link>
+            <span>•</span>
+            <div className="flex items-center gap-1">
+              <span>صُنع في السودان</span>
+              <Heart size={12} className="text-rose-500 fill-rose-500" />
+            </div>
           </div>
         </div>
       </div>

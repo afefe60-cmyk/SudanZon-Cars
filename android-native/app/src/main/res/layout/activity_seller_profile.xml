@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cars_bg"
+    android:layoutDirection="rtl">
+
+    <!-- Top Header -->
+    <LinearLayout
+        android:id="@+id/headerSellerProfile"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/cars_white"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp">
+
+        <ImageView
+            android:id="@+id/btnSellerProfileBack"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_search_input"
+            android:padding="9dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/cars_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="ملف المعلن والمعرض"
+            android:textColor="@color/cars_text"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnSellerProfileShare"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_search_input"
+            android:padding="9dp"
+            android:src="@android:drawable/ic_menu_share"
+            app:tint="@color/cars_text" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav"
+        android:layout_below="@id/headerSellerProfile">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Seller Hero Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/cars_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp">
+
+                        <ImageView
+                            android:id="@+id/imgSellerAvatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/btn_add_circle"
+                            android:padding="16dp"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="@color/cars_white" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="bottom|end"
+                            android:background="@drawable/btn_whatsapp"
+                            android:padding="4dp"
+                            android:src="@android:drawable/checkbox_on_background"
+                            app:tint="@color/cars_white" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/txtSellerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="معرض النخبة للسيارات"
+                        android:textColor="@color/cars_text"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSellerBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="✔ معرض معتمد • عضو موثق في سودان زون"
+                        android:textColor="@color/cars_green"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSellerMeta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="📍 الخرطوم • عضو منذ 2024 • ★ 4.9 (42 تقييم)"
+                        android:textColor="@color/cars_text_muted"
+                        android:textSize="12sp" />
+
+                    <!-- Quick Contact Buttons Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <!-- Call -->
+                        <Button
+                            android:id="@+id/btnSellerCall"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_call"
+                            android:text="اتصال 📞"
+                            android:textColor="@color/cars_white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <!-- WhatsApp -->
+                        <Button
+                            android:id="@+id/btnSellerWhatsapp"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_whatsapp"
+                            android:text="واتساب 💬"
+                            android:textColor="@color/cars_white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <!-- In-app Message -->
+                        <Button
+                            android:id="@+id/btnSellerChat"
+                            android:layout_width="0dp"
+                            android:layout_height="42dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_search_input"
+                            android:text="رسالة ✉"
+                            android:textColor="@color/cars_text"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Seller Cars Section Header -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/txtSellerCarsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="جميع سيارات وإعلانات المعلن"
+                    android:textColor="@color/cars_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSellerCarsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/bg_search_input"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="جاري التحميل..."
+                    android:textColor="@color/cars_primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Seller Cars List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSellerCars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Unified Bottom Navigation Bar -->
+    <include layout="@layout/view_bottom_nav" />
+
+</RelativeLayout>

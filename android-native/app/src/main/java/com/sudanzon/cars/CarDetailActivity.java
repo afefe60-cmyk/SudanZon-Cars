@@ -104,6 +104,36 @@ public class CarDetailActivity extends AppCompatActivity {
             }
         });
 
+        // Seller Profile Card Click -> Open Seller Profile with all listings
+        View cardSellerProfile = findViewById(R.id.cardSellerProfile);
+        if (cardSellerProfile != null) {
+            cardSellerProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sIntent = new Intent(CarDetailActivity.this, SellerProfileActivity.class);
+                    sIntent.putExtra("sellerName", car.getSellerName());
+                    sIntent.putExtra("sellerPhone", car.getSellerPhone());
+                    sIntent.putExtra("sellerWhatsapp", car.getSellerWhatsapp());
+                    startActivity(sIntent);
+                }
+            });
+        }
+
+        // In-App Chat Button
+        View btnInAppChat = findViewById(R.id.btnInAppChat);
+        if (btnInAppChat != null) {
+            btnInAppChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent cIntent = new Intent(CarDetailActivity.this, ChatConversationActivity.class);
+                    cIntent.putExtra("sellerName", car.getSellerName());
+                    cIntent.putExtra("carTitle", car.getTitle());
+                    cIntent.putExtra("sellerPhone", car.getSellerPhone());
+                    startActivity(cIntent);
+                }
+            });
+        }
+
         // Call Button (Native Dialer Intent)
         findViewById(R.id.btnCall).setOnClickListener(new View.OnClickListener() {
             @Override

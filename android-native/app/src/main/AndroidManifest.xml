@@ -35,6 +35,7 @@
         <activity
             android:name=".SearchActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 4. Car Details -->
@@ -47,6 +48,7 @@
         <activity
             android:name=".AddCarActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 6. Notifications -->
@@ -59,6 +61,7 @@
         <activity
             android:name=".AccountActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- 8. Login Screen -->
@@ -70,6 +73,31 @@
         <!-- 9. Register Screen -->
         <activity
             android:name=".RegisterActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 10. Direct Chats -->
+        <activity
+            android:name=".ChatsActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 11. Chat Conversation -->
+        <activity
+            android:name=".ChatConversationActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 12. Seller Profile & Showroom -->
+        <activity
+            android:name=".SellerProfileActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- 13. Privacy Policy & Terms -->
+        <activity
+            android:name=".PrivacyPolicyActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
 

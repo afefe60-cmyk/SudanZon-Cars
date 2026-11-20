@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cars_bg"
+    android:layoutDirection="rtl">
+
+    <!-- Top Header -->
+    <LinearLayout
+        android:id="@+id/headerPrivacy"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/cars_white"
+        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp">
+
+        <ImageView
+            android:id="@+id/btnPrivacyBack"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_search_input"
+            android:padding="9dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/cars_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="سياسة الخصوصية وشروط الاستخدام"
+            android:textColor="@color/cars_text"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerPrivacy"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Card: Introduction -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/cars_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="مرحباً بك في سودان زون للسيارات SudanZon Cars"
+                        android:textColor="@color/cars_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="نحن في منصة سودان زون للسيارات نلتزم بأعلى معايير حماية البيانات والخصوصية لكافة مستخدمينا، سواء كنت مشترياً يبحث عن سيارة أو معلناً أو صاحب معرض. توضح هذه الوثيقة سياسات جمع البيانات وكيفية استخدامها وشروط استخدام المنصة."
+                        android:textColor="@color/cars_text"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card: 1. جمع البيانات -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/cars_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1. المعلومات التي نقوم بجمعها"
+                        android:textColor="@color/cars_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="• بيانات الحساب: الاسم الكامل، رقم الهاتف، البريد الإلكتروني، والمدينة.\n• بيانات الإعلانات: مواصفات السيارة، الصور، السعر بالجنيه السوداني (ج.س)، ورقم التواصل والواتساب.\n• بيانات التواصل والمحادثات: الرسائل المتبادلة بين المشترين والمعلنين لتسهيل عمليات البيع والشراء بأمان."
+                        android:textColor="@color/cars_text_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card: 2. شروط النشر والإعلانات -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/cars_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2. شروط نشر إعلانات السيارات"
+                        android:textColor="@color/cars_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="• يجب أن تكون بيانات السيارة المعروضة حقيقية ومطابقة للواقع (الموديل، الممشى، الحالة).\n• يمنع منعاً باتاً نشر إعلانات مضللة أو وهمية أو سيارات غير متوفرة.\n• تلتزم جميع المعارض والمعلنون بعدم نشر أرقام هواتف غير تابعة لهم.\n• تحتفظ إدارة سودان زون بحق حذف أي إعلان مخالف للقوانين أو الشروط دون سابق إنذار."
+                        android:textColor="@color/cars_text_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card: 3. الأمان والدعم -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/cars_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3. نصائح الأمان وتواصل معنا"
+                        android:textColor="@color/cars_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="• ننصح دائماً بفحص السيارة فحصاً فنياً معتمداً ومعاينة الأوراق الثبوتية قبل إتمام أي عملية دفع.\n• للدعم الفني والاستفسارات أو الإبلاغ عن إعلان مخالف، يرجى مراسلتنا عبر البريد: support@sudanzon.com أو عبر واتساب الدعم الفني."
+                        android:textColor="@color/cars_text_muted"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sudanzon.cars.api.SessionManager;
+import com.sudanzon.cars.ui.NavigationHelper;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class AccountActivity extends AppCompatActivity {
         findViewById(R.id.menuChats).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AccountActivity.this, "المحادثات المباشرة مع البائعين", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AccountActivity.this, ChatsActivity.class));
             }
         });
 
@@ -68,6 +69,13 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AccountActivity.this, NotificationsActivity.class));
+            }
+        });
+
+        findViewById(R.id.menuPrivacyPolicy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountActivity.this, PrivacyPolicyActivity.class));
             }
         });
 
@@ -99,6 +107,7 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        NavigationHelper.setupBottomNav(this, R.id.navAccount);
         refreshState();
     }
 

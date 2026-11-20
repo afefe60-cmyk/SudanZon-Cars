@@ -21,6 +21,7 @@ public class CarItem implements Serializable {
     private String customsStatus;
     private String licenseStatus;
     private String city;
+    private String condition = "USED";
     private String description;
     private String mainImageUrl;
     private List<String> images = new ArrayList<>();
@@ -33,6 +34,32 @@ public class CarItem implements Serializable {
     private boolean isVerifiedSeller;
 
     public CarItem() {}
+
+    public static CarItem create(String id, String title, int year, double priceSdg, String city, String sellerName, String sellerPhone, String sellerWhatsapp, String mainImage) {
+        CarItem item = new CarItem();
+        item.id = id;
+        item.title = title;
+        item.brand = "تويوتا";
+        item.model = title;
+        item.year = year;
+        item.priceSdg = priceSdg;
+        item.city = city;
+        item.condition = "USED";
+        item.mileage = 25000;
+        item.transmission = "أوتوماتيك";
+        item.engineSize = "4 سلندر";
+        item.description = "بحالة ممتازة صيانة دورية، فحص كامل.";
+        item.mainImageUrl = mainImage;
+        item.images.add(mainImage);
+        item.isFeatured = true;
+        item.rating = 4.8;
+        item.reviewsCount = 42;
+        item.sellerName = sellerName;
+        item.sellerPhone = sellerPhone;
+        item.sellerWhatsapp = sellerWhatsapp;
+        item.isVerifiedSeller = true;
+        return item;
+    }
 
     public static CarItem fromJson(JSONObject obj) {
         if (obj == null) return null;
@@ -50,6 +77,7 @@ public class CarItem implements Serializable {
         item.customsStatus = obj.optString("customsStatus", "مجمرك");
         item.licenseStatus = obj.optString("licenseStatus", "مرخص ساري");
         item.city = obj.optString("city", "الخرطوم");
+        item.condition = obj.optString("condition", "USED");
         item.description = obj.optString("description", "");
         item.mainImageUrl = obj.optString("mainImage", "");
         item.isFeatured = obj.optBoolean("isFeatured", false);
@@ -96,6 +124,7 @@ public class CarItem implements Serializable {
     public String getCustomsStatus() { return customsStatus; }
     public String getLicenseStatus() { return licenseStatus; }
     public String getCity() { return city; }
+    public String getCondition() { return condition; }
     public String getDescription() { return description; }
     public String getMainImageUrl() { return mainImageUrl; }
     public List<String> getImages() { return images; }

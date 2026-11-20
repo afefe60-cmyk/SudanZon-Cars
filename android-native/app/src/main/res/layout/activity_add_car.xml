@@ -1,261 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cars_bg"
-    android:fillViewport="true">
+    android:layoutDirection="rtl">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav"
+        android:fillViewport="true">
 
-        <!-- Top Header Bar -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp">
-
-            <ImageView
-                android:id="@+id/btnAddCarBack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:src="@android:drawable/ic_menu_revert"
-                android:contentDescription="رجوع" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="إضافة إعلان سيارة"
-                android:textColor="@color/cars_primary_navy"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <!-- Form Card -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_card_white"
-            android:elevation="2dp"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
 
-            <!-- Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:text="عنوان الإعلان *"
-                android:textColor="@color/cars_text"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtAddTitle"
+            <!-- Top Header Bar -->
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/bg_search_input"
-                android:hint="مثال: تويوتا كامري 2022 بحالة ممتازة"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/cars_text"
-                android:textColorHint="#94A3B8"
-                android:textSize="14sp" />
+                android:layout_marginBottom="16dp">
 
-            <!-- Brand & Model Row -->
+                <ImageView
+                    android:id="@+id/btnAddCarBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_revert"
+                    android:contentDescription="رجوع" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="إضافة إعلان سيارة"
+                    android:textColor="@color/cars_primary_navy"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Form Card -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:orientation="horizontal">
+                android:background="@drawable/bg_card_white"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <!-- Title -->
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="6dp"
+                    android:text="عنوان الإعلان *"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:text="الماركة"
-                        android:textColor="@color/cars_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edtAddTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="مثال: تويوتا كامري 2023 فل كامل"
+                    android:inputType="text"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/edtAddBrand"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_search_input"
-                        android:hint="تويوتا، هيونداي..."
-                        android:paddingHorizontal="12dp"
-                        android:textColor="@color/cars_text"
-                        android:textColorHint="#94A3B8"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <!-- Price SDG -->
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="6dp"
+                    android:text="السعر المطلوب (بالجنيه السوداني ج.س) *"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:text="الموديل"
-                        android:textColor="@color/cars_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/edtAddPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="مثال: 55000000"
+                    android:inputType="number"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/edtAddModel"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_search_input"
-                        android:hint="لاندكروزر، كورولا..."
-                        android:paddingHorizontal="12dp"
-                        android:textColor="@color/cars_text"
-                        android:textColorHint="#94A3B8"
-                        android:textSize="13sp" />
-                </LinearLayout>
+                <!-- Year -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="سنة الصنع *"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtAddYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="2023"
+                    android:inputType="number"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
+
+                <!-- Mileage -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="الممشى (كم)"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtAddMileage"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="مثال: 35000"
+                    android:inputType="number"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
+
+                <!-- City -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="المدينة / الولاية *"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtAddCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="الخرطوم / أم درمان / بورتسودان"
+                    android:inputType="text"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="تفاصيل ووصف السيارة"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtAddDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_search_input"
+                    android:gravity="top|start"
+                    android:hint="حالة المحرك، البودي، الفحص، المواصفات الخاصة..."
+                    android:inputType="textMultiLine"
+                    android:padding="12dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="13sp" />
+
+                <!-- Phone -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="رقم هاتف التواصل والواتساب *"
+                    android:textColor="@color/cars_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtAddPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_search_input"
+                    android:hint="0912345678"
+                    android:inputType="phone"
+                    android:paddingHorizontal="14dp"
+                    android:textColor="@color/cars_text"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="14sp" />
+
+                <!-- Submit Button -->
+                <Button
+                    android:id="@+id/btnAddCarSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/btn_whatsapp"
+                    android:text="نشر إعلان السيارة الآن"
+                    android:textColor="@color/cars_white"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
-
-            <!-- Year & City Row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:text="سنة الصنع"
-                        android:textColor="@color/cars_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/edtAddYear"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_search_input"
-                        android:hint="2022"
-                        android:inputType="number"
-                        android:paddingHorizontal="12dp"
-                        android:textColor="@color/cars_text"
-                        android:textColorHint="#94A3B8"
-                        android:textSize="13sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:text="المدينة / الولاية"
-                        android:textColor="@color/cars_text"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/edtAddCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/bg_search_input"
-                        android:hint="بورتسودان، الخرطوم..."
-                        android:paddingHorizontal="12dp"
-                        android:textColor="@color/cars_text"
-                        android:textColorHint="#94A3B8"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Price in SDG -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:text="السعر المطلوب (بالجنيه السوداني ج.س) *"
-                android:textColor="@color/cars_text"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtAddPrice"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/bg_search_input"
-                android:hint="مثال: 65000000"
-                android:inputType="numberDecimal"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/cars_text"
-                android:textColorHint="#94A3B8"
-                android:textSize="14sp" />
-
-            <!-- WhatsApp Phone -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
-                android:text="رقم الواتساب للتواصل *"
-                android:textColor="@color/cars_text"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edtAddPhone"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_search_input"
-                android:hint="0912345678"
-                android:inputType="phone"
-                android:paddingHorizontal="14dp"
-                android:textColor="@color/cars_text"
-                android:textColorHint="#94A3B8"
-                android:textSize="14sp" />
-
-            <!-- Submit Button -->
-            <Button
-                android:id="@+id/btnAddCarSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_whatsapp"
-                android:text="نشر إعلان السيارة الآن"
-                android:textColor="@color/cars_white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
+    <!-- Unified Bottom Navigation Bar -->
+    <include layout="@layout/view_bottom_nav" />
+
+</RelativeLayout>
