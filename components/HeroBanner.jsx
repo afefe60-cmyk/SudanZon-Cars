@@ -4,218 +4,310 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  CheckCircle2, 
-  Plus, 
-  ChevronLeft, 
-  ChevronRight, 
   Search, 
-  Car,
-  Star,
-  DollarSign
+  MapPin, 
+  Car, 
+  Tag, 
+  Sparkles, 
+  CheckCircle2, 
+  PlusCircle,
+  SlidersHorizontal,
+  Flame,
+  ArrowRight
 } from "lucide-react";
 
 export default function HeroBanner({ onSearch }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Quick filter states
+  // Search parameters
   const [selectedBrand, setSelectedBrand] = useState("");
-  const [priceFrom, setPriceFrom] = useState("");
-  const [priceTo, setPriceTo] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
   const [selectedType, setSelectedType] = useState("");
+  const [priceRange, setPriceRange] = useState("");
 
-  const handleSearchClick = () => {
+  const handleSearchSubmit = (e) => {
+    e?.preventDefault();
+
+    let priceFrom = "";
+    let priceTo = "";
+
+    if (priceRange === "under_40") {
+      priceTo = "40000000";
+    } else if (priceRange === "40_80") {
+      priceFrom = "40000000";
+      priceTo = "80000000";
+    } else if (priceRange === "above_80") {
+      priceFrom = "80000000";
+    }
+
     onSearch?.({
       brand: selectedBrand,
-      priceFrom,
-      priceTo,
+      city: selectedCity,
       type: selectedType,
+      priceFrom,
+      priceTo
+    });
+  };
+
+  const handleQuickTagClick = (tagBrand, tagType, tagCity, tagPrice) => {
+    setSelectedBrand(tagBrand || "");
+    setSelectedCity(tagCity || "");
+    setSelectedType(tagType || "");
+    setPriceRange(tagPrice || "");
+
+    let priceFrom = "";
+    let priceTo = "";
+    if (tagPrice === "under_50") {
+      priceTo = "50000000";
+    }
+
+    onSearch?.({
+      brand: tagBrand || "",
+      city: tagCity || "",
+      type: tagType || "",
+      priceFrom,
+      priceTo
     });
   };
 
   return (
-    <div className="home-hero space-y-4">
-      <div className="home-hero-reference hidden lg:block">
-        <Image
-          src="/homepage-hero-reference.jpg"
-          alt="سودان زون للسيارات: سيارات متعددة وبحث سريع وإعلانات موثوقة"
-          width={1536}
-          height={264}
-          priority
-          sizes="100vw"
-        />
-        <Link className="home-hero-reference-cta" href="/add-car" aria-label="أضف إعلانك الآن" />
-      </div>
-      {/* 1. Main Hero Banner (Matching the exact look in the screenshot) */}
-      <div className="home-hero-panel relative rounded-3xl overflow-hidden bg-gradient-to-l from-[#072548] via-[#0b386e] to-[#144f94] text-white shadow-xl min-h-[340px] sm:min-h-[380px] lg:min-h-[420px] flex flex-col justify-between p-6 sm:p-10 lg:p-12">
-        {/* Decorative Lighting */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-sky-400/20 via-transparent to-transparent pointer-events-none"></div>
+    <div className="w-full space-y-4">
+      {/* 1. Main Visual Hero Container with Deep Navy & Gold Accent */}
+      <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#003366] via-[#004d99] to-[#002244] text-white shadow-xl border border-sky-800/40 p-6 sm:p-8 lg:p-10">
+        
+        {/* Subtle Decorative Geometric Background */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -right-20 -top-20 w-80 h-80 bg-sky-400/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* Content Container (2 columns on desktop) */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-          {/* Right Column in RTL: Marketing Text & CTA Button */}
-          <div className="lg:col-span-6 space-y-4 text-right">
-            <div className="space-y-1">
-              <h1 dir="ltr" className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white flex items-center gap-2">
-                <span>SudanZon</span>
-                <span className="text-amber-400">Cars</span>
-              </h1>
-              <p className="text-xl sm:text-2xl lg:text-3xl font-black text-amber-400">
-                سيارتك .. على بعد نقرة واحدة
-              </p>
-              {/* Golden dynamic curve underline under text */}
-              <div className="w-56 h-2 bg-gradient-to-l from-amber-400 to-transparent rounded-full mt-1"></div>
-            </div>
-
-            {/* Checklist with Yellow Checkmarks */}
-            <ul className="space-y-2 text-xs sm:text-sm text-slate-100 font-bold pt-2">
-              <li className="flex items-center gap-2.5">
-                <CheckCircle2 size={18} className="text-amber-400 shrink-0" />
-                <span>إعلانات موثوقة</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <CheckCircle2 size={18} className="text-amber-400 shrink-0" />
-                <span>بحث سهل وسريع</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <CheckCircle2 size={18} className="text-amber-400 shrink-0" />
-                <span>تواصل مباشر مع المالك أو المعرض</span>
-              </li>
-            </ul>
-
-            {/* CTA Button */}
-            <div className="pt-2">
-              <Link
-                href="/add-car"
-                className="inline-flex items-center gap-2 py-3 px-8 rounded-2xl font-black text-sm sm:text-base bg-[#f59e0b] hover:bg-[#d97706] text-slate-900 shadow-xl shadow-amber-500/30 transition active:scale-95"
-              >
-                <Plus size={20} strokeWidth={3} />
-                <span>أضف إعلانك الآن</span>
-              </Link>
-            </div>
+        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+          
+          {/* Top Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-300 text-xs font-black shadow-sm">
+            <Sparkles size={14} className="text-amber-400 animate-pulse" />
+            <span>سوق ومعارض السيارات الأول في السودان 🇸🇩</span>
           </div>
 
-          {/* Left Column in RTL: Cars & Khartoum Skyline Image */}
-          <div className="lg:col-span-6 flex items-center justify-center relative">
-            <div className="home-hero-mobile-image relative w-full max-w-lg aspect-[16/9] drop-shadow-2xl">
-              <Image
-                src="/hero-cars-mobile.jpg"
-                alt="سيارات سودان زون"
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
-          </div>
-        </div>
+          {/* Main Headline */}
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-snug">
+            اعثر على سيارتك القادمة بأفضل سعر <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-200">
+              بالجنيه السوداني مباشرة من البائع
+            </span>
+          </h1>
 
-        {/* Carousel side arrows & bottom dots */}
-        <div className="relative z-10 flex items-center justify-between pt-4 mt-2">
-          {/* Right Arrow (Next in RTL) */}
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev > 0 ? prev - 1 : 3))}
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition text-white"
-            aria-label="السابق"
+          <p className="text-xs sm:text-base text-sky-100 max-w-2xl mx-auto font-medium leading-relaxed">
+            مئات الإعلانات اليومية للسيارات المستعملة والزيرو في الخرطوم، بورتسودان، عطبرة ومدني، مع خدمة الفحص الفني وتواصل فوري عبر الواتساب.
+          </p>
+
+          {/* Quick CTAs */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+            <Link
+              href="/add-car"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-amber-400/20 transition-all hover:scale-105"
+            >
+              <PlusCircle size={16} />
+              <span>أضف إعلان سيارتك مجاناً</span>
+            </Link>
+
+            <Link
+              href="/showrooms"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm backdrop-blur-sm border border-white/20 transition"
+            >
+              <span>تصفح المعارض المعتمدة</span>
+              <ArrowRight size={14} className="rotate-180" />
+            </Link>
+          </div>
+
+          {/* 2. Interactive Search Box with 4 Criteria */}
+          <form
+            onSubmit={handleSearchSubmit}
+            className="bg-white/95 backdrop-blur-md rounded-2xl p-3 sm:p-4 shadow-2xl border border-white/40 text-slate-800 text-right mt-6"
           >
-            <ChevronRight size={20} />
-          </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+              
+              {/* Field 1: Brand */}
+              <div className="relative">
+                <label className="block text-[11px] font-bold text-slate-500 mb-1 px-1">ماركة السيارة</label>
+                <div className="relative">
+                  <select
+                    value={selectedBrand}
+                    onChange={(e) => setSelectedBrand(e.target.value)}
+                    className="w-full pr-8 pl-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600 appearance-none"
+                  >
+                    <option value="">كل الماركات (تويوتا، هيونداي...)</option>
+                    <option value="تويوتا">تويوتا (Toyota)</option>
+                    <option value="هيونداي">هيونداي (Hyundai)</option>
+                    <option value="نيسان">نيسان (Nissan)</option>
+                    <option value="كيا">كيا (Kia)</option>
+                    <option value="ميتسوبيشي">ميتسوبيشي (Mitsubishi)</option>
+                    <option value="مرسيدس">مرسيدس بنز (Mercedes)</option>
+                    <option value="سوزوكي">سوزوكي (Suzuki)</option>
+                  </select>
+                  <Car size={15} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
 
-          {/* Dots Indicator */}
-          <div className="flex items-center gap-2">
-            {[0, 1, 2, 3].map((dot) => (
-              <span
-                key={dot}
-                className={`h-2.5 rounded-full transition-all ${
-                  dot === currentSlide
-                    ? "w-8 bg-amber-400"
-                    : "w-2.5 bg-white/60"
-                }`}
-              />
-            ))}
-          </div>
+              {/* Field 2: City */}
+              <div className="relative">
+                <label className="block text-[11px] font-bold text-slate-500 mb-1 px-1">المدينة والولاية</label>
+                <div className="relative">
+                  <select
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                    className="w-full pr-8 pl-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600 appearance-none"
+                  >
+                    <option value="">كل المدن السودانية</option>
+                    <option value="بورتسودان">بورتسودان (البحر الأحمر)</option>
+                    <option value="الخرطوم">الخرطوم / أم درمان / بحري</option>
+                    <option value="عطبرة">عطبرة / الدامر (نهر النيل)</option>
+                    <option value="ود مدني">ود مدني (الجزيرة)</option>
+                    <option value="كسلا">كسلا</option>
+                    <option value="القضارف">القضارف</option>
+                  </select>
+                  <MapPin size={15} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
 
-          {/* Left Arrow */}
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev < 3 ? prev + 1 : 0))}
-            className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition text-white"
-            aria-label="التالي"
-          >
-            <ChevronLeft size={20} />
-          </button>
-        </div>
-      </div>
+              {/* Field 3: Body Type */}
+              <div className="relative">
+                <label className="block text-[11px] font-bold text-slate-500 mb-1 px-1">نوع الهيكل / الفئة</label>
+                <div className="relative">
+                  <select
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                    className="w-full pr-8 pl-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600 appearance-none"
+                  >
+                    <option value="">كل الفئات</option>
+                    <option value="sedan">سيدان (صالون)</option>
+                    <option value="suv">دفع رباعي (SUV / جيب)</option>
+                    <option value="truck">بيك آب وشاحنات (Pickup)</option>
+                    <option value="bus">حافلات وفانات (Van / Bus)</option>
+                  </select>
+                  <SlidersHorizontal size={15} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
 
-      {/* 2. Horizontal Quick Filter Bar (Matching image exactly) */}
-      <div className="home-filter hidden lg:block bg-white rounded-2xl border border-slate-200/90 p-3 shadow-sm">
-        <div className="grid grid-cols-12 gap-3 items-center">
-          {/* Right-to-left order: body type, make, minimum, maximum, search */}
-          <div className="col-span-3">
-            <select
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-[#0066cc] transition"
-            >
-              <option value="">نوع الهيكل</option>
-              <option value="sedan">سيدان</option>
-              <option value="suv">دفع رباعي (SUV)</option>
-              <option value="truck">شاحنات وبكاسي</option>
-              <option value="hatchback">هاتشباك</option>
-              <option value="luxury">سيارات فاخرة</option>
-            </select>
-          </div>
+              {/* Field 4: Price in SDG */}
+              <div className="relative">
+                <label className="block text-[11px] font-bold text-slate-500 mb-1 px-1">السعر بالجنيه السوداني</label>
+                <div className="relative">
+                  <select
+                    value={priceRange}
+                    onChange={(e) => setPriceRange(e.target.value)}
+                    className="w-full pr-8 pl-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-blue-600 appearance-none"
+                  >
+                    <option value="">كافة الأسعار (ج.س)</option>
+                    <option value="under_40">أقل من 40 مليون ج.س</option>
+                    <option value="40_80">من 40 إلى 80 مليون ج.س</option>
+                    <option value="above_80">أكثر من 80 مليون ج.س</option>
+                  </select>
+                  <Tag size={15} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                </div>
+              </div>
 
-          <div className="col-span-3">
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-[#0066cc] transition"
-            >
-              <option value="">اختر الماركة</option>
-              <option value="Toyota">تويوتا (Toyota)</option>
-              <option value="Hyundai">هيونداي (Hyundai)</option>
-              <option value="Kia">كيا (Kia)</option>
-              <option value="Nissan">نيسان (Nissan)</option>
-              <option value="Mitsubishi">ميتسوبيشي (Mitsubishi)</option>
-            </select>
-          </div>
+            </div>
 
-          <div className="col-span-2">
-            <select
-              value={priceFrom}
-              onChange={(e) => setPriceFrom(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-[#0066cc] transition"
-            >
-              <option value="">السعر من (ج.س)</option>
-              <option value="15000000">15 مليون ج.س</option>
-              <option value="30000000">30 مليون ج.س</option>
-              <option value="50000000">50 مليون ج.س</option>
-              <option value="80000000">80 مليون ج.س</option>
-              <option value="120000000">120 مليون ج.س</option>
-            </select>
-          </div>
+            {/* Submit & Filter Reset */}
+            <div className="flex items-center justify-between gap-3 mt-3 pt-3 border-t border-slate-100">
+              <div className="text-[11px] text-slate-400 font-bold hidden sm:block">
+                تصفية فورية دقيقة بدون إعادة تحميل الصفحة
+              </div>
 
-          <div className="col-span-2">
-            <select
-              value={priceTo}
-              onChange={(e) => setPriceTo(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 text-xs font-bold text-slate-800 focus:bg-white focus:ring-2 focus:ring-[#0066cc] transition"
-            >
-              <option value="">السعر إلى (ج.س)</option>
-              <option value="40000000">40 مليون ج.س</option>
-              <option value="70000000">70 مليون ج.س</option>
-              <option value="100000000">100 مليون ج.س</option>
-              <option value="150000000">150 مليون ج.س</option>
-              <option value="250000000">250 مليون ج.س</option>
-            </select>
-          </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                {(selectedBrand || selectedCity || selectedType || priceRange) && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedBrand("");
+                      setSelectedCity("");
+                      setSelectedType("");
+                      setPriceRange("");
+                      onSearch?.({});
+                    }}
+                    className="px-3 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 transition"
+                  >
+                    إعادة ضبط
+                  </button>
+                )}
 
-          <div className="col-span-2">
+                <button
+                  type="submit"
+                  className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-[#004d99] hover:bg-[#003366] text-white font-black text-xs sm:text-sm shadow-md transition"
+                >
+                  <Search size={15} />
+                  <span>بحث في السيارات</span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          {/* 3. Trending Tags Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 text-xs">
+            <span className="text-[11px] text-sky-200 font-bold flex items-center gap-1">
+              <Flame size={13} className="text-amber-400" />
+              <span>الأكثر بحثاً:</span>
+            </span>
+
             <button
-              onClick={handleSearchClick}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-black text-sm bg-[#0066cc] hover:bg-[#004d99] text-white shadow-md shadow-blue-500/20 transition active:scale-95"
+              onClick={() => handleQuickTagClick("تويوتا", "suv", "", "")}
+              className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-[11px] transition border border-white/10"
             >
-              <Search size={18} />
-              <span>بحث</span>
+              لاندكروزر V8
             </button>
+
+            <button
+              onClick={() => handleQuickTagClick("تويوتا", "sedan", "", "")}
+              className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-[11px] transition border border-white/10"
+            >
+              كامري وارد الخليج
+            </button>
+
+            <button
+              onClick={() => handleQuickTagClick("هيونداي", "", "بورتسودان", "")}
+              className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-[11px] transition border border-white/10"
+            >
+              هيونداي بورتسودان
+            </button>
+
+            <button
+              onClick={() => handleQuickTagClick("", "", "", "under_50")}
+              className="px-2.5 py-1 rounded-lg bg-amber-400/20 hover:bg-amber-400/30 text-amber-300 font-bold text-[11px] transition border border-amber-400/30"
+            >
+              أقل من 50 مليون ج.س
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Trust & Guarantee Highlights Bar */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+        <div className="bg-white rounded-xl p-3 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-bold">
+            <CheckCircle2 size={18} />
+          </div>
+          <div>
+            <div className="font-black text-slate-800">تواصل مباشر بدون وسيط</div>
+            <div className="text-[10px] text-slate-500">مراسلة واتساب ومكالمة فورية مع صاحب السيارة</div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl p-3 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center flex-shrink-0 font-bold">
+            <Sparkles size={18} />
+          </div>
+          <div>
+            <div className="font-black text-slate-800">أسعار صريحة بالجنيه السوداني</div>
+            <div className="text-[10px] text-slate-500">تسعير واقعي محدث مع معادلة الدولار التقديرية</div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl p-3 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0 font-bold">
+            <CheckCircle2 size={18} />
+          </div>
+          <div>
+            <div className="font-black text-slate-800">خدمة الفحص والجمارك المعتمدة</div>
+            <div className="text-[10px] text-slate-500">فحص شاسيه وماكينة وتخليص في بورتسودان والخرطوم</div>
           </div>
         </div>
       </div>
