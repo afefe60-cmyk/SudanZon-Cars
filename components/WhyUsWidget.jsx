@@ -32,7 +32,7 @@ export default function WhyUsWidget() {
     },
     {
       title: "دعم فني وخدمة عملاء مميزة",
-      desc: "فريق دعم واستشارات جمركية متواجد عبر الواتساب على مدار الساعة",
+      desc: "فريق دعم واستشارات متواجد عبر الواتساب على مدار الساعة",
       icon: Headphones,
       color: "text-amber-600 bg-amber-50 border-amber-100",
     },
@@ -53,7 +53,7 @@ export default function WhyUsWidget() {
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-6 bg-[#004d99] rounded-full inline-block"></span>
             <h3 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
-              لماذا السودان زون للسيارات؟
+              لماذا سودان زون للسيارات؟
             </h3>
           </div>
 
@@ -104,13 +104,13 @@ export default function WhyUsWidget() {
         </Link>
 
         <a
-          href={`https://wa.me/249912345678?text=${whatsappHelp}`}
+          href={`https://wa.me/24907620105?text=${whatsappHelp}`}
           target="_blank"
           rel="noreferrer"
           className="w-full py-2 px-4 rounded-xl bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold text-xs transition border border-slate-200/80 flex items-center justify-center gap-2"
         >
           <MessageSquare size={14} className="text-emerald-600" />
-          <span>استفسار أو مساعدة عبر الواتساب</span>
+          <span>استفسار أو مساعدة عبر الواتساب (24907620105)</span>
         </a>
       </div>
 
@@ -163,7 +163,7 @@ export default function WhyUsWidget() {
         </div>
 
         <p className="text-xs font-black text-[#004d99] tracking-wide">
-          مع السودان زون .. بيع واشتري بسهولة وأمان
+          مع سودان زون .. بيع واشتري بسهولة وأمان
         </p>
         <p className="text-[10px] text-slate-400 font-medium">
           SudanZon Cars • سوق السيارات الموثوق

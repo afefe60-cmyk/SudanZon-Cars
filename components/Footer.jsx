@@ -53,8 +53,8 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-slate-400">
               <li><Link href="/showrooms" className="hover:text-amber-400 transition">معارض السيارات بالولايات</Link></li>
               <li><Link href="/spare-parts" className="hover:text-amber-400 transition">سوق قطع الغيار الأصلية</Link></li>
-              <li><Link href="/customs" className="hover:text-amber-400 transition">دليل الجمارك والتسجيل</Link></li>
-              <li><Link href="/inspection" className="hover:text-amber-400 transition">خدمة الفحص الفني المعتمد</Link></li>
+              <li><Link href="/services" className="hover:text-amber-400 transition">دليل الجمارك والتسجيل</Link></li>
+              <li><Link href="/services" className="hover:text-amber-400 transition">خدمة الفحص الفني المعتمد</Link></li>
               <li><Link href="/add-car" className="text-sky-400 font-bold hover:underline">أضف سيارتك للبيع مجاناً</Link></li>
             </ul>
           </div>
@@ -71,7 +71,15 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={16} className="text-emerald-400 shrink-0" />
-                <span dir="ltr">+249 99 999 9999</span>
+                <a 
+                  href="https://wa.me/24907620105" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="hover:text-emerald-400 transition flex items-center gap-1.5"
+                >
+                  <span dir="ltr" className="font-bold">+249 076 20105</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">واتساب</span>
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={16} className="text-amber-400 shrink-0" />
@@ -79,7 +87,7 @@ export default function Footer() {
               </div>
               <div className="pt-2">
                 <a 
-                  href="http://localhost:3002"
+                  href="https://sudanzon.com"
                   className="inline-block px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition"
                 >
                   الانتقال إلى سوق سودان زون الشامل ➔
