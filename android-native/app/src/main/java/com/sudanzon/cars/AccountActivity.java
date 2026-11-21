@@ -102,6 +102,8 @@ public class AccountActivity extends AppCompatActivity {
                 }
             }
         });
+
+        NavigationHelper.setupBottomNav(this, R.id.navAccount);
     }
 
     @Override

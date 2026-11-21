@@ -54,6 +54,8 @@ public class SearchActivity extends AppCompatActivity {
         searchAdapter = new CarAdapter(this, displayCars);
         rvSearchResults.setAdapter(searchAdapter);
 
+        NavigationHelper.setupBottomNav(this, R.id.navSearch);
+
         findViewById(R.id.btnSearchBack).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

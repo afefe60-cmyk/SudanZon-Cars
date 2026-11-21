@@ -45,6 +45,8 @@ public class ChatsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        NavigationHelper.setupBottomNav(this, R.id.navChats);
     }
 
     @Override

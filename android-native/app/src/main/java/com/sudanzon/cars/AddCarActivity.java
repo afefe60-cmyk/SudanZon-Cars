@@ -52,6 +52,8 @@ public class AddCarActivity extends AppCompatActivity {
                 handleSubmitCar();
             }
         });
+
+        NavigationHelper.setupBottomNav(this, R.id.navAdd);
     }
 
     @Override

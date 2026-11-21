@@ -22,6 +22,9 @@ public class NavigationHelper {
         View bottomNav = activity.findViewById(R.id.bottomNav);
         if (bottomNav == null) return;
 
+        // Bring bottom nav to front so no other scroll/recycler view overlays it
+        bottomNav.bringToFront();
+
         // Reset all tabs to muted style
         setTabStyle(activity, R.id.navHomeIcon, R.id.navHomeText, false);
         setTabStyle(activity, R.id.navSearchIcon, R.id.navSearchText, false);
@@ -45,10 +48,8 @@ public class NavigationHelper {
             btnHome.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentTabId == R.id.navHome) {
-                        if (activity instanceof MainActivity) {
-                            ((MainActivity) activity).scrollToTop();
-                        }
+                    if (activity instanceof MainActivity) {
+                        ((MainActivity) activity).scrollToTop();
                     } else {
                         navigateTo(activity, MainActivity.class);
                     }
@@ -62,7 +63,7 @@ public class NavigationHelper {
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentTabId != R.id.navSearch) {
+                    if (!(activity instanceof SearchActivity)) {
                         navigateTo(activity, SearchActivity.class);
                     }
                 }
@@ -75,7 +76,7 @@ public class NavigationHelper {
             btnAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentTabId != R.id.navAdd) {
+                    if (!(activity instanceof AddCarActivity)) {
                         navigateTo(activity, AddCarActivity.class);
                     }
                 }
@@ -88,7 +89,7 @@ public class NavigationHelper {
             btnChats.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentTabId != R.id.navChats) {
+                    if (!(activity instanceof ChatsActivity)) {
                         navigateTo(activity, ChatsActivity.class);
                     }
                 }
@@ -101,7 +102,7 @@ public class NavigationHelper {
             btnAccount.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (currentTabId != R.id.navAccount) {
+                    if (!(activity instanceof AccountActivity)) {
                         navigateTo(activity, AccountActivity.class);
                     }
                 }
@@ -110,10 +111,16 @@ public class NavigationHelper {
     }
 
     private static void navigateTo(Activity current, Class<?> targetClass) {
+        if (current.getClass().equals(targetClass)) return;
+
         Intent intent = new Intent(current, targetClass);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         current.startActivity(intent);
         current.overridePendingTransition(0, 0);
+
+        if (!(current instanceof MainActivity)) {
+            current.finish();
+        }
     }
 
     private static void setTabStyle(Activity activity, int iconId, int textId, boolean isActive) {

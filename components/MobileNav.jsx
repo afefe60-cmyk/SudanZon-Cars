@@ -7,6 +7,11 @@ import { Home, Search, Plus, Heart, User } from "lucide-react";
 export default function MobileNav() {
   const pathname = usePathname();
 
+  // Hide on splash screen and car details page (which has its own dedicated seller contact action bar)
+  if (pathname === "/splash" || (pathname && pathname.startsWith("/cars/"))) {
+    return null;
+  }
+
   const navItems = [
     { label: "الرئيسية", href: "/", icon: Home },
     { label: "بحث", href: "/search", icon: Search },
