@@ -5,8 +5,8 @@ export default function BrandLogo({ size = "default", className = "" }) {
   const isSmall = size === "small";
   const isLarge = size === "large";
 
-  const width = isLarge ? 240 : isSmall ? 130 : 180;
-  const height = isLarge ? 54 : isSmall ? 30 : 40;
+  const width = isLarge ? 300 : isSmall ? 192 : 276;
+  const height = isLarge ? 88 : isSmall ? 58 : 78;
 
   return (
     <Link 
@@ -15,11 +15,11 @@ export default function BrandLogo({ size = "default", className = "" }) {
     >
       <div className="relative" style={{ width, height }}>
         <Image
-          src="/logo.png"
+          src="/logo.jpg"
           alt="SudanZon CARS"
           fill
           priority
-          className="object-contain"
+          className="object-cover"
         />
       </div>
     </Link>

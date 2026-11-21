@@ -265,37 +265,47 @@ export default function AdminCarsDashboard() {
 
   // Verify Admin Authentication on Mount
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sudanzon_user");
-      const token = localStorage.getItem("sudanzon_token");
-      
-      if (!stored) {
-        setIsAuthorized(false);
-        setLoading(false);
-        return;
-      }
+    const verifyAdmin = async () => {
+      try {
+        const token = localStorage.getItem("sudanzon_token");
+        if (!token || token === "demo_token") {
+          setIsAuthorized(false);
+          return;
+        }
 
-      const parsedUser = JSON.parse(stored);
-      setCurrentUser(parsedUser);
+        const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) {
+          setIsAuthorized(false);
+          return;
+        }
 
-      // Check if Admin role or master phone
-      if (parsedUser.role === "ADMIN" || parsedUser.phone === "9999999999") {
+        const data = await res.json();
+        if (data.user?.role !== "ADMIN") {
+          setIsAuthorized(false);
+          return;
+        }
+
+        setCurrentUser(data.user);
+        localStorage.setItem("sudanzon_user", JSON.stringify(data.user));
         setIsAuthorized(true);
-        fetchBackendCars();
-      } else {
+        await fetchBackendCars(token);
+      } catch (e) {
         setIsAuthorized(false);
+      } finally {
+        setLoading(false);
       }
-    } catch (e) {
-      setIsAuthorized(false);
-    } finally {
-      setLoading(false);
-    }
+    };
+    verifyAdmin();
   }, []);
 
   // Fetch cars from backend API if available
-  const fetchBackendCars = async () => {
+  const fetchBackendCars = async (token = localStorage.getItem("sudanzon_token")) => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/cars?limit=50`);
+      const res = await fetch(`${API_BASE_URL}/api/cars?limit=50`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
       if (res.ok) {
         const json = await res.json();
         if (json.data && Array.isArray(json.data) && json.data.length > 0) {
@@ -317,12 +327,21 @@ export default function AdminCarsDashboard() {
   const handleToggleStatus = async (carId, currentStatus) => {
     const nextStatus = currentStatus === "ACTIVE" ? "PENDING" : "ACTIVE";
     try {
-      await fetch(`${API_BASE_URL}/api/cars/${carId}`, {
+      const token = localStorage.getItem("sudanzon_token");
+      const res = await fetch(`${API_BASE_URL}/api/cars/${carId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ status: nextStatus })
       });
-    } catch (e) {}
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        showToast(data.message || "تعذر تحديث الإعلان");
+        return;
+      }
+    } catch (e) {
+      showToast("تعذر الاتصال بالخادم");
+      return;
+    }
 
     setCars(prev => prev.map(c => c.id === carId ? { ...c, status: nextStatus } : c));
     showToast(nextStatus === "ACTIVE" ? "تم اعتماد ونشر الإعلان بنجاح" : "تم تحويل الإعلان إلى قيد المراجعة");
@@ -330,10 +349,20 @@ export default function AdminCarsDashboard() {
 
   const handleToggleFeatured = async (carId) => {
     try {
-      await fetch(`${API_BASE_URL}/api/cars/${carId}/featured`, {
-        method: "PATCH"
+      const token = localStorage.getItem("sudanzon_token");
+      const res = await fetch(`${API_BASE_URL}/api/cars/${carId}/featured`, {
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${token}` },
       });
-    } catch (e) {}
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        showToast(data.message || "تعذر تغيير تمييز الإعلان");
+        return;
+      }
+    } catch (e) {
+      showToast("تعذر الاتصال بالخادم");
+      return;
+    }
 
     setCars(prev => prev.map(c => {
       if (c.id === carId) {
@@ -349,10 +378,20 @@ export default function AdminCarsDashboard() {
     if (!confirm("هل أنت متأكد من حذف هذا الإعلان نهائياً من المنصة؟")) return;
 
     try {
-      await fetch(`${API_BASE_URL}/api/cars/${carId}`, {
-        method: "DELETE"
+      const token = localStorage.getItem("sudanzon_token");
+      const res = await fetch(`${API_BASE_URL}/api/cars/${carId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
       });
-    } catch (e) {}
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        showToast(data.message || "تعذر حذف الإعلان");
+        return;
+      }
+    } catch (e) {
+      showToast("تعذر الاتصال بالخادم");
+      return;
+    }
 
     setCars(prev => prev.filter(c => c.id !== carId));
     showToast("تم حذف إعلان السيارة بنجاح");
@@ -367,16 +406,25 @@ export default function AdminCarsDashboard() {
     }
 
     try {
-      await fetch(`${API_BASE_URL}/api/cars/${editingCar.id}`, {
+      const token = localStorage.getItem("sudanzon_token");
+      const res = await fetch(`${API_BASE_URL}/api/cars/${editingCar.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           priceSdg: parsedPrice,
           priceUsd: Math.round(parsedPrice / 2800),
           status: editStatus
         })
       });
-    } catch (e) {}
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        showToast(data.message || "تعذر حفظ التعديلات");
+        return;
+      }
+    } catch (e) {
+      showToast("تعذر الاتصال بالخادم");
+      return;
+    }
 
     setCars(prev => prev.map(c => c.id === editingCar.id ? {
       ...c,

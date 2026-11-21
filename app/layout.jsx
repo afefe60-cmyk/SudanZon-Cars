@@ -97,7 +97,7 @@ export default function RootLayout({ children }) {
     "@type": "AutoDealer",
     "name": "سودان زون للسيارات - SudanZon Cars",
     "url": "https://cars.sudanzon.com",
-    "logo": "https://cars.sudanzon.com/brand-logo.png",
+    "logo": "https://cars.sudanzon.com/logo.jpg",
     "image": "https://cars.sudanzon.com/brand_suite_thumb.png",
     "description": "منصة وسوق معارض السيارات المستعملة والجديدة في السودان بالجنيه السوداني.",
     "currenciesAccepted": "SDG, USD",
@@ -113,7 +113,7 @@ export default function RootLayout({ children }) {
     <html lang="ar" dir="rtl">
       <head>
         <meta name="theme-color" content="#004d99" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />

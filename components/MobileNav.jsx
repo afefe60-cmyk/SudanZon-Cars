@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, Plus, MessageSquare, User } from "lucide-react";
+import { Home, Search, Plus, Heart, User } from "lucide-react";
 
 export default function MobileNav() {
   const pathname = usePathname();
@@ -11,7 +11,7 @@ export default function MobileNav() {
     { label: "الرئيسية", href: "/", icon: Home },
     { label: "بحث", href: "/search", icon: Search },
     { label: "إضافة إعلان", href: "/add-car", icon: Plus, isCta: true },
-    { label: "المحادثات", href: "/messages", icon: MessageSquare },
+    { label: "المفضلة", href: "/favorites", icon: Heart },
     { label: "حسابي", href: "/account", icon: User },
   ];
 
@@ -29,7 +29,7 @@ export default function MobileNav() {
                 href={item.href}
                 className="flex flex-col items-center justify-center -mt-6 group"
               >
-                <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#16a34a] text-white flex items-center justify-center shadow-lg shadow-emerald-600/30 border-[3px] border-white group-active:scale-95 transition-transform p-3">
+                <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-[#16a34a] text-white flex items-center justify-center shadow-lg shadow-emerald-600/30 border-[3px] border-white group-active:scale-95 transition-transform p-3">
                   <Plus size={26} strokeWidth={3} />
                 </div>
                 <span className="text-[10px] font-bold text-slate-700 mt-0.5">

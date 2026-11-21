@@ -42,7 +42,8 @@ export default function AccountPage() {
         setCurrentUser(prev => ({
           ...prev,
           name: u.name || prev.name,
-          phone: u.phone || prev.phone
+          phone: u.phone || prev.phone,
+          role: u.role || prev.role
         }));
         setIsLoggedIn(true);
       } else if (!token) {
@@ -122,7 +123,18 @@ export default function AccountPage() {
           </div>
         </div>
 
-        {/* Green Manage Account Button (Matching Screen 8) */}
+        {/* Admin Dashboard Access for Admin */}
+        {(currentUser.role === "ADMIN" || currentUser.phone === "9999999999") && (
+          <Link
+            href="/admin"
+            className="w-full mt-4 py-3 px-4 rounded-2xl font-black text-xs bg-amber-400 hover:bg-amber-300 text-slate-950 shadow-md transition flex items-center justify-center gap-2"
+          >
+            <Settings size={15} />
+            <span>الدخول إلى لوحة إدارة سيارات سودان زون ⚙</span>
+          </Link>
+        )}
+
+        {/* Green Manage Account Button */}
         {isLoggedIn ? (
           <button 
             onClick={() => alert("بيانات الحساب محدثة وجاهزة")}

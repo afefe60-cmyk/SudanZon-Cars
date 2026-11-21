@@ -21,7 +21,9 @@ import {
   ArrowLeft,
   LogOut,
   ShieldAlert,
-  Settings
+  Settings,
+  MessageSquare,
+  Heart
 } from "lucide-react";
 
 export default function Header() {
@@ -61,7 +63,7 @@ export default function Header() {
     { label: "الدعم والمساعدة", href: "/support", icon: Headphones },
   ];
 
-  const isAdmin = currentUser && (currentUser.role === "ADMIN" || currentUser.phone === "9999999999");
+  const isAdmin = currentUser?.role === "ADMIN";
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-none border-0">
@@ -86,6 +88,11 @@ export default function Header() {
 
           {/* Left: Dynamic Auth Links */}
           <div className="flex items-center gap-4 font-bold">
+            <Link href="/favorites" className="flex items-center gap-1.5 hover:text-amber-300 transition">
+              <Heart size={14} />
+              <span>المفضلة</span>
+            </Link>
+            <span className="text-sky-300/40">|</span>
             {currentUser ? (
               <>
                 {isAdmin && (
@@ -177,7 +184,7 @@ export default function Header() {
       </div>
 
       {/* 3. Mobile Header */}
-      <div className="lg:hidden px-4 py-2.5 flex items-center justify-between">
+      <div className="home-mobile-header lg:hidden px-4 py-2.5 flex items-center justify-between">
         <Link 
           href="/notifications" 
           className="relative p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition active:scale-95"
@@ -195,6 +202,8 @@ export default function Header() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition active:scale-95"
           aria-label="القائمة"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation-drawer"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -202,7 +211,7 @@ export default function Header() {
 
       {/* 4. Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-3 shadow-xl">
+        <div id="mobile-navigation-drawer" className="lg:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-3 shadow-xl">
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-xs font-bold">
             {currentUser ? (
               <div className="flex items-center justify-between w-full">
@@ -247,6 +256,14 @@ export default function Header() {
                 </Link>
               );
             })}
+            <Link
+              href="/messages"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition"
+            >
+              <MessageSquare size={18} className="text-[#0066cc]" />
+              <span>المحادثات</span>
+            </Link>
             <Link
               href="/add-car"
               onClick={() => setMobileMenuOpen(false)}

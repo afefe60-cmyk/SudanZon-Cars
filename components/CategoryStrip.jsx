@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { 
   LayoutGrid, 
   Crown, 
@@ -8,11 +7,6 @@ import {
   Truck, 
   Bus, 
   Bike,
-  Sparkles,
-  ShoppingBag,
-  Building2,
-  Users2,
-  BadgePercent,
   Compass
 } from "lucide-react";
 
@@ -28,47 +22,34 @@ export const DESKTOP_BODY_TYPES = [
   { id: "moto", label: "دراجات نارية", icon: Bike, image: "/category-motorcycle.jpg", count: "25+" },
 ];
 
-// Mobile quick 6 service grid (Matching Screen 2 of image 1)
-export const MOBILE_SERVICES = [
-  { id: "used", label: "سيارات مستعملة", icon: Car, href: "/search?type=used", color: "text-[#0066cc] bg-blue-50" },
-  { id: "new", label: "سيارات جديدة", icon: Sparkles, href: "/search?type=new", color: "text-amber-600 bg-amber-50" },
-  { id: "parts", label: "قطع غيار وإكسسوارات", icon: ShoppingBag, href: "/spare-parts", color: "text-emerald-600 bg-emerald-50" },
-  { id: "showrooms", label: "معارض السيارات", icon: Building2, href: "/showrooms", color: "text-indigo-600 bg-indigo-50" },
-  { id: "dealers", label: "الموردين والتجار", icon: Users2, href: "/showrooms", color: "text-sky-600 bg-sky-50" },
-  { id: "offers", label: "عروض خاصة", icon: BadgePercent, href: "/search?filter=offers", color: "text-rose-600 bg-rose-50" },
-];
-
 export default function CategoryStrip({ activeType = "all", onSelectType }) {
   return (
-    <div className="space-y-6">
-      {/* 1. Mobile 6-Grid Services (Visible on Mobile only - Matching Screen 2) */}
-      <div className="lg:hidden">
-        <div className="grid grid-cols-3 gap-2.5">
-          {MOBILE_SERVICES.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="bg-white rounded-2xl border border-slate-200/90 p-3 flex flex-col items-center justify-center text-center shadow-sm active:scale-95 transition-transform"
-              >
-                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center mb-1.5 ${item.color}`}>
-                  <Icon size={22} />
-                </div>
-                <span className="text-[11px] font-bold text-slate-800 leading-tight">
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+    <div>
+      <nav className="home-mobile-categories lg:hidden" aria-label="فئات السيارات">
+        {DESKTOP_BODY_TYPES.map((cat) => {
+          const Icon = cat.icon;
+          const selected = activeType === cat.id;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => onSelectType?.(cat.id)}
+              aria-pressed={selected}
+              className={`home-mobile-category ${selected ? "is-selected" : ""}`}
+            >
+              <span className="home-mobile-category-image">
+                <img src={cat.image} alt="" aria-hidden="true" />
+              </span>
+              <span>{cat.id === "all" ? "الكل" : cat.label.replace("سيارات ", "")}</span>
+            </button>
+          );
+        })}
+      </nav>
 
       {/* 2. Desktop Body-Type Strip (Visible on Desktop - Matching image 2) */}
       <div className="home-category-strip hidden lg:block">
         <div className="grid grid-cols-8 gap-3">
           {DESKTOP_BODY_TYPES.map((cat) => {
-            const Icon = cat.icon;
             const isSelected = activeType === cat.id;
 
             return (

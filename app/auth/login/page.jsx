@@ -38,18 +38,10 @@ export default function LoginPage() {
         alert("مرحباً بك! تم تسجيل الدخول بنجاح 👋");
         router.push("/account");
       } else {
-        // Fallback for demo or invalid credentials
-        localStorage.setItem("sudanzon_token", "demo_token");
-        localStorage.setItem("sudanzon_user", JSON.stringify({ name: "محمد أحمد علي", phone }));
-        alert("تم تسجيل الدخول بنجاح!");
-        router.push("/account");
+        setErrorMsg(data.message || "تعذر تسجيل الدخول. تحقق من البيانات وحاول مرة أخرى.");
       }
     } catch (err) {
-      // Local demo fallback
-      localStorage.setItem("sudanzon_token", "demo_token");
-      localStorage.setItem("sudanzon_user", JSON.stringify({ name: "محمد أحمد علي", phone }));
-      alert("تم تسجيل الدخول بنجاح!");
-      router.push("/account");
+      setErrorMsg("تعذر الاتصال بالخادم. تحقق من اتصالك وحاول مرة أخرى.");
     } finally {
       setIsSubmitting(false);
     }

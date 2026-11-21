@@ -43,6 +43,13 @@ export default function AddCarPage() {
   });
 
   const handleSubmit = async () => {
+    const token = localStorage.getItem("sudanzon_token");
+    if (!token || token === "demo_token") {
+      alert("سجّل الدخول أولًا حتى نربط الإعلان بحسابك.");
+      router.push("/auth/login");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const payload = {
@@ -65,20 +72,18 @@ export default function AddCarPage() {
 
       const res = await fetch(`${API_BASE_URL}/api/cars`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(payload)
       });
       const data = await res.json();
-      if (data.success) {
-        alert("تهانينا! تم نشر إعلان سيارتك بنجاح على منصة SudanZon Cars 🚀");
+      if (res.ok && data.success) {
+        alert("تم استلام إعلانك بنجاح، وسيظهر بعد مراجعته من الإدارة.");
         router.push("/");
       } else {
-        alert("حدث تنبيه: " + (data.message || "تم تسجيل الإعلان محلياً"));
-        router.push("/");
+        alert(data.message || "تعذر حفظ الإعلان. حاول مرة أخرى.");
       }
     } catch (e) {
-      alert("تم نشر الإعلان بنجاح في وضع التطوير المحلي!");
-      router.push("/");
+      alert("تعذر الاتصال بالخادم، ولم يتم حفظ الإعلان. حاول مرة أخرى.");
     } finally {
       setIsSubmitting(false);
     }

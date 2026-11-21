@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { 
   ArrowRight, 
   SlidersHorizontal, 
@@ -39,11 +40,29 @@ const BRANDS = [
 ];
 
 export default function SearchPage() {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedState, setSelectedState] = useState("كل الولايات");
   const [selectedBrand, setSelectedBrand] = useState("كل الماركات");
   const [priceMax, setPriceMax] = useState(120000000);
   const [activeCategory, setActiveCategory] = useState("all");
+
+  const handleSearchSubmit = () => {
+    const params = new URLSearchParams();
+    if (query) params.set("q", query);
+    if (selectedBrand !== "كل الماركات") {
+      const cleanBrand = selectedBrand.split(" ")[0];
+      params.set("brand", cleanBrand);
+    }
+    if (selectedState !== "كل الولايات") {
+      if (selectedState.includes("بورتسودان")) params.set("city", "بورتسودان");
+      else if (selectedState.includes("الخرطوم")) params.set("city", "الخرطوم");
+      else if (selectedState.includes("عطبرة")) params.set("city", "عطبرة");
+      else if (selectedState.includes("مدني")) params.set("city", "ود مدني");
+      else if (selectedState.includes("كسلا")) params.set("city", "كسلا");
+    }
+    router.push(`/cars?${params.toString()}`);
+  };
 
   const categories = [
     { id: "used", label: "سيارات مستعملة", icon: Car },
@@ -162,10 +181,11 @@ export default function SearchPage() {
 
         {/* Big Blue Search Button */}
         <button
-          className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#0066cc] hover:bg-[#004d99] text-white shadow-lg shadow-blue-500/25 transition active:scale-95"
+          onClick={handleSearchSubmit}
+          className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#004d99] hover:bg-[#003366] text-white shadow-lg shadow-blue-900/20 transition active:scale-95"
         >
           <Search size={18} />
-          <span>بحث</span>
+          <span>تطبيق الفلتر وعرض النتائج</span>
         </button>
       </div>
     </div>

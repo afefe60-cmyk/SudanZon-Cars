@@ -40,18 +40,10 @@ export default function RegisterPage() {
         alert(`أهلاً بك يا ${name}! تم إنشاء حسابك بنجاح 🚀`);
         router.push("/account");
       } else {
-        // Fallback for offline demo
-        localStorage.setItem("sudanzon_token", "demo_token");
-        localStorage.setItem("sudanzon_user", JSON.stringify({ name, phone, city }));
-        alert(`أهلاً بك يا ${name}! تم تفعيل حسابك بنجاح 🎉`);
-        router.push("/account");
+        setErrorMsg(data.message || "تعذر إنشاء الحساب. تحقق من البيانات وحاول مرة أخرى.");
       }
     } catch (err) {
-      // Local fallback
-      localStorage.setItem("sudanzon_token", "demo_token");
-      localStorage.setItem("sudanzon_user", JSON.stringify({ name, phone, city }));
-      alert(`أهلاً بك يا ${name}! تم إنشاء حسابك بنجاح 🎉`);
-      router.push("/account");
+      setErrorMsg("تعذر الاتصال بالخادم. تحقق من اتصالك وحاول مرة أخرى.");
     } finally {
       setIsSubmitting(false);
     }
