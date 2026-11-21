@@ -59,7 +59,7 @@ export default function Header() {
     { label: "جميع السيارات", href: "/cars", icon: Car },
     { label: "المعارض", href: "/showrooms", icon: Building2 },
     { label: "قطع الغيار", href: "/spare-parts", icon: Tag },
-    { label: "الخدمات", href: "/services", icon: Wrench },
+    { label: "الخدمات", href: "/services", icon: Wrench, badge: "قريباً" },
     { label: "الدعم والمساعدة", href: "/support", icon: Headphones },
   ];
 
@@ -171,7 +171,14 @@ export default function Header() {
                       : ""
                   }`}
                 >
-                  <Icon size={22} strokeWidth={2.7} aria-hidden="true" />
+                  <div className="relative">
+                    <Icon size={22} strokeWidth={2.7} aria-hidden="true" />
+                    {item.badge && (
+                      <span className="absolute -top-1.5 -left-3 text-[9px] bg-amber-400 text-slate-950 px-1 py-0.2 rounded-full font-black scale-90 shadow-xs">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
                   <span>{item.label}</span>
                   {isActive && (
                     <span className="home-nav-underline absolute -bottom-1 inset-x-3 h-[3px] bg-[#0066cc] rounded-full"></span>
@@ -249,10 +256,17 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-50 transition"
+                  className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-50 transition"
                 >
-                  <Icon size={18} className="text-[#0066cc]" />
-                  <span>{item.label}</span>
+                  <div className="flex items-center gap-3">
+                    <Icon size={18} className="text-[#0066cc]" />
+                    <span>{item.label}</span>
+                  </div>
+                  {item.badge && (
+                    <span className="text-[10px] bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-full font-black">
+                      {item.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}

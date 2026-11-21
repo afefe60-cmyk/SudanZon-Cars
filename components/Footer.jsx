@@ -53,8 +53,8 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-slate-400">
               <li><Link href="/showrooms" className="hover:text-amber-400 transition">معارض السيارات بالولايات</Link></li>
               <li><Link href="/spare-parts" className="hover:text-amber-400 transition">سوق قطع الغيار الأصلية</Link></li>
-              <li><Link href="/services" className="hover:text-amber-400 transition">دليل الجمارك والتسجيل</Link></li>
-              <li><Link href="/services" className="hover:text-amber-400 transition">خدمة الفحص الفني المعتمد</Link></li>
+              <li><Link href="/services" className="hover:text-amber-400 transition">دليل الجمارك والتسجيل (قريباً)</Link></li>
+              <li><Link href="/services" className="hover:text-amber-400 transition">خدمة الفحص الفني المعتمد (قريباً)</Link></li>
               <li><Link href="/add-car" className="text-sky-400 font-bold hover:underline">أضف سيارتك للبيع مجاناً</Link></li>
             </ul>
           </div>
